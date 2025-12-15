@@ -15,7 +15,9 @@ class SetoranSampah extends Model
         'user_id',
         'sampah_id',
         'berat_kg',
-        'deskripsi',
+        'alamat',
+        'total_poin',
+        'total_harga',
     ];
 
     // RELASI KE USER

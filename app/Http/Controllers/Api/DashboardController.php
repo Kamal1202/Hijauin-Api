@@ -12,18 +12,15 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // total berat sampah user
         $totalWasteKg = $user->setoranSampah()->sum('berat_kg');
-
-        // aturan poin (contoh: 1 kg = 100 poin)
-        $points = (int) ($totalWasteKg * 100);
+        $totalPoints  = $user->setoranSampah()->sum('total_poin');
 
         return response()->json([
             'user' => [
                 'name' => $user->name,
             ],
-            'total_waste_kg' => $totalWasteKg,
-            'points' => $points,
+            'total_waste_kg' => (float) $totalWasteKg,
+            'points' => (int) $totalPoints,
         ]);
     }
 }
