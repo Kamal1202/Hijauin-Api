@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\SetoranController;
+use App\Http\Controllers\Api\SampahController;
+use App\Http\Controllers\Api\UserController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -19,5 +21,23 @@ Route::middleware('auth:sanctum')->get('/setoran', [SetoranController::class, 'i
 //ambil data artikel
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{id}', [ArticleController::class, 'show']);
+
+// Route sampah
+Route::get('/sampah', [SampahController::class, 'index']);
+
+// Route setoran sampah
+Route::post('/setoran-sampah', [SetoranController::class, 'store']);
+
+Route::get('/user/{id}/alamat', function ($id) {
+    $user = \App\Models\User::find($id);
+
+    if (!$user) {
+        return response()->json(['message' => 'User tidak ditemukan'], 404);
+    }
+
+    return response()->json([
+        'alamat' => $user->alamat
+    ]);
+});
 
 ?>

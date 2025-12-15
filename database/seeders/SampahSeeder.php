@@ -26,6 +26,14 @@ class SampahSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nama' => 'Kaleng',
+                'kategori' => 'Logam',
+                'harga_per_kg' => 5000,
+                'deskripsi' => 'Kaleng bekas',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
