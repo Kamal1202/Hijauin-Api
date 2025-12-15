@@ -92,4 +92,34 @@ class AuthController extends Controller
             'user' => $request->user()
         ]);
     }
+
+    // ===================== UPDATE PROFILE =====================
+public function updateProfile(Request $request)
+{
+    $user = $request->user();
+
+    $validator = Validator::make($request->all(), [
+        'name'   => 'required|string|max:255',
+        'alamat' => 'required|string',
+        'no_hp'  => 'required|string',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => 'Validasi gagal',
+            'errors'  => $validator->errors(),
+        ], 422);
+    }
+
+    $user->update([
+        'name'   => $request->name,
+        'alamat' => $request->alamat,
+        'no_hp'  => $request->no_hp,
+    ]);
+
+    return response()->json([
+        'message' => 'Profil berhasil diperbarui',
+        'user'    => $user,
+    ], 200);
+}
 }
